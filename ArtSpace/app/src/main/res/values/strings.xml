@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Art Space</string>
+    <string name="title_kaguya">카구야님은 고백받고 싶어</string>
+    <string name="title_milije">에이티식스</string>
+
+    <string name="ch_kaguya">카구야</string>
+    <string name="ch_milije">카구야</string>
+</resources>
