@@ -1,0 +1,3 @@
+[submodule "affirmations"]
+	path = affirmations
+	url = git@github.com:google-developer-training/basic-android-kotlin-compose-training-affirmations.git
