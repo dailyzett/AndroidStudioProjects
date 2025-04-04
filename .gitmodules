@@ -1,0 +1,4 @@
+[submodule "woof"]
+	path = woof
+	url = https://github.com/google-developer-training/basic-android-kotlin-compose-training-woof.git
+	branch = starter
