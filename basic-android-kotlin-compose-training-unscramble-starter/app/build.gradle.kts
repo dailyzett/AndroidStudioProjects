@@ -76,4 +76,5 @@ dependencies {
 
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
 }
