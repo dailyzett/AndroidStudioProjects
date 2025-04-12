@@ -64,10 +64,9 @@ class OrderViewModel : ViewModel() {
                 itemTotalPrice = itemTotalPrice,
                 orderTax = tax,
                 orderTotalPrice = itemTotalPrice + tax,
-                entree = if (newItem is EntreeItem) newItem else currentState.entree,
-                sideDish = if (newItem is SideDishItem) newItem else currentState.sideDish,
-                accompaniment =
-                    if (newItem is AccompanimentItem) newItem else currentState.accompaniment
+                entree = newItem as? EntreeItem ?: currentState.entree,
+                sideDish = newItem as? SideDishItem ?: currentState.sideDish,
+                accompaniment = newItem as? AccompanimentItem ?: currentState.accompaniment
             )
         }
     }
