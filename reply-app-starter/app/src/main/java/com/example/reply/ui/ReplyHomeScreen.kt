@@ -92,6 +92,7 @@ fun ReplyHomeScreen(
         )
     )
 
+    val navigationDrawerContentDescription = stringResource(R.string.navigation_drawer)
     if (navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER
     ) {
         PermanentNavigationDrawer(
@@ -106,6 +107,7 @@ fun ReplyHomeScreen(
                             .fillMaxHeight()
                             .background(MaterialTheme.colorScheme.inverseOnSurface)
                             .padding(dimensionResource(R.dimen.drawer_padding_content))
+                            .testTag(navigationDrawerContentDescription)
                     )
                 }
             }
@@ -189,13 +191,15 @@ private fun ReplyAppContent(
                     )
                 }
                 AnimatedVisibility(visible = navigationType == ReplyNavigationType.BOTTOM_NAVIGATION) {
-                    val bottomNavigationContentDescription = stringResource(R.string.navigation_bottom)
+                    val bottomNavigationContentDescription =
+                        stringResource(R.string.navigation_bottom)
                     ReplyBottomNavigationBar(
                         currentTab = replyUiState.currentMailbox,
                         onTabPressed = onTabPressed,
                         navigationItemContentList = navigationItemContentList,
                         modifier = Modifier
                             .fillMaxWidth()
+                            .testTag(bottomNavigationContentDescription)
                     )
                 }
             }
