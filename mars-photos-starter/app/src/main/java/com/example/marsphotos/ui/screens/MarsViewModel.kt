@@ -33,7 +33,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 sealed interface MarsUiState {
-    data class Success @OptIn(InternalSerializationApi::class) constructor(val photos: MarsPhoto) :
+    data class Success @OptIn(InternalSerializationApi::class) constructor(val photos: List<MarsPhoto>) :
         MarsUiState
 
     object Error : MarsUiState
@@ -64,7 +64,7 @@ class MarsViewModel(
             marsUiState = MarsUiState.Loading
             marsUiState = try {
                 MarsUiState.Success(
-                    marsPhotosRepository.getMarsPhotos()[0]
+                    marsPhotosRepository.getMarsPhotos()
                 )
             } catch (e: IOException) {
                 MarsUiState.Error
