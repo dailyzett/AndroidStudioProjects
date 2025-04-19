@@ -28,11 +28,14 @@ import com.example.marsphotos.MarsPhotosApplication
 import com.example.marsphotos.data.MarsPhotosRepository
 import com.example.marsphotos.model.MarsPhoto
 import kotlinx.coroutines.launch
+import kotlinx.serialization.InternalSerializationApi
 import retrofit2.HttpException
 import java.io.IOException
 
 sealed interface MarsUiState {
-    data class Success(val photos: String) : MarsUiState
+    data class Success @OptIn(InternalSerializationApi::class) constructor(val photos: MarsPhoto) :
+        MarsUiState
+
     object Error : MarsUiState
     object Loading : MarsUiState
 }
@@ -55,15 +58,13 @@ class MarsViewModel(
      * Gets Mars photos information from the Mars API Retrofit service and updates the
      * [MarsPhoto] [List] [MutableList].
      */
+    @OptIn(InternalSerializationApi::class)
     fun getMarsPhotos() {
         viewModelScope.launch {
             marsUiState = MarsUiState.Loading
             marsUiState = try {
-
-                val listResult = marsPhotosRepository.getMarsPhotos()
-
                 MarsUiState.Success(
-                    "Success: ${listResult.size} Mars photos retrieved"
+                    marsPhotosRepository.getMarsPhotos()[0]
                 )
             } catch (e: IOException) {
                 MarsUiState.Error
