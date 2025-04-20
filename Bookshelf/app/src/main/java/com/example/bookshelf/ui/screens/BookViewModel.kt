@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 
 sealed interface BooksUiState {
-    data class Success(val bookVolume: BookVolume) : BooksUiState
+    data class Success(val bookVolume: List<BookVolume>) : BooksUiState
     object Loading : BooksUiState
 }
 
@@ -29,9 +29,11 @@ class BookViewModel : ViewModel() {
     private fun getJazzHistory() {
         viewModelScope.launch {
             val jazzHistory: JazzHistory = repository.getJazzHistory()
-            val bookId = jazzHistory.items[0].id
+            val bookIds: List<String> = jazzHistory.items.map { it.id }
 
-            val bookVolumes: BookVolume = repository.getBookVolumes(bookId)
+            val bookVolumes: List<BookVolume> = bookIds.map {
+                repository.getBookVolumes(it)
+            }
 
             uiState = BooksUiState.Success(bookVolumes)
         }

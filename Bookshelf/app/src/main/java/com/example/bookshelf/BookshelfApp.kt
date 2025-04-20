@@ -50,7 +50,7 @@ fun BookShelfApp() {
         ) {
             when (uiState) {
                 is BooksUiState.Loading -> LoadingScreen()
-                is BooksUiState.Success -> BookVolumeScreen(bookVolume = uiState.bookVolume)
+                is BooksUiState.Success -> BookVolumeScreen(bookVolumes = uiState.bookVolume)
             }
         }
     }
