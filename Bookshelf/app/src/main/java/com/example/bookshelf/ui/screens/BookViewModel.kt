@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookshelf.data.BooksRepository
 import com.example.bookshelf.network.BookVolume
 import com.example.bookshelf.network.JazzHistory
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 
@@ -32,8 +34,8 @@ class BookViewModel : ViewModel() {
             val bookIds: List<String> = jazzHistory.items.map { it.id }
 
             val bookVolumes: List<BookVolume> = bookIds.map {
-                repository.getBookVolumes(it)
-            }
+                async { repository.getBookVolumes(it) }
+            }.awaitAll()
 
             uiState = BooksUiState.Success(bookVolumes)
         }
