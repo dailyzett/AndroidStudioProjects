@@ -16,7 +16,6 @@
 
 package com.example.inventory.ui
 
-import android.app.Application
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -29,7 +28,7 @@ import com.example.inventory.ui.item.ItemEditViewModel
 import com.example.inventory.ui.item.ItemEntryViewModel
 
 /**
- * Provides Factory to create instance of ViewModel for the entire Inventory app
+ * 전체 인벤토리 앱에 대한 뷰모델 인스턴스를 생성하는 팩토리를 제공합니다.
  */
 object AppViewModelProvider {
     val Factory = viewModelFactory {
@@ -41,7 +40,9 @@ object AppViewModelProvider {
         }
         // Initializer for ItemEntryViewModel
         initializer {
-            ItemEntryViewModel()
+            ItemEntryViewModel(
+                itemsRepository = inventoryApplication().container.itemsRepository
+            )
         }
 
         // Initializer for ItemDetailsViewModel
@@ -59,8 +60,7 @@ object AppViewModelProvider {
 }
 
 /**
- * Extension function to queries for [Application] object and returns an instance of
- * [InventoryApplication].
+ * Application 객체를 쿼리하고 InventoryApplication의 인스턴스를 반환하는 확장 함수입니다.
  */
 fun CreationExtras.inventoryApplication(): InventoryApplication =
     (this[AndroidViewModelFactory.APPLICATION_KEY] as InventoryApplication)

@@ -21,12 +21,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.inventory.data.Item
+import com.example.inventory.data.ItemsRepository
 import java.text.NumberFormat
 
 /**
  * ViewModel to validate and insert items in the Room database.
  */
-class ItemEntryViewModel : ViewModel() {
+class ItemEntryViewModel(
+    private val itemsRepository: ItemsRepository,
+) : ViewModel() {
 
     /**
      * Holds current item ui state
@@ -48,6 +51,12 @@ class ItemEntryViewModel : ViewModel() {
             name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
         }
     }
+
+    suspend fun saveItem() {
+        if (validateInput()) {
+            itemsRepository.insertItem(itemUiState.itemDetails.toItem())
+        }
+    }
 }
 
 /**
@@ -66,9 +75,7 @@ data class ItemDetails(
 )
 
 /**
- * Extension function to convert [ItemDetails] to [Item]. If the value of [ItemDetails.price] is
- * not a valid [Double], then the price will be set to 0.0. Similarly if the value of
- * [ItemDetails.quantity] is not a valid [Int], then the quantity will be set to 0
+ * ItemDetails를 Item으로 변환하는 확장 함수입니다. ItemDetails. price의 값이 유효한 Double이 아닌 경우 가격은 0.0으로 설정됩니다. 마찬가지로 ItemDetails. quantity의 값이 유효한 Int가 아닌 경우 수량은 0으로 설정됩니다.
  */
 fun ItemDetails.toItem(): Item = Item(
     id = id,
