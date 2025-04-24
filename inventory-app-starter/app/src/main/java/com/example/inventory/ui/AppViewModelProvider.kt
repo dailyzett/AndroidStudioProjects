@@ -54,7 +54,9 @@ object AppViewModelProvider {
 
         // Initializer for HomeViewModel
         initializer {
-            HomeViewModel()
+            HomeViewModel(
+                itemsRepository = inventoryApplication().container.itemsRepository
+            )
         }
     }
 }
