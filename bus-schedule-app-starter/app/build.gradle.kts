@@ -1,17 +1,15 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2023 안드로이드 오픈소스 프로젝트
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Apache 라이선스 2.0("라이선스")에 따라 라이선스가 부여됩니다.
+ * 라이선스를 준수하지 않는 한 이 파일을 사용할 수 없습니다.
+ * 라이선스 사본은 다음에서 얻을 수 있습니다:
  *
  *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 관련 법률에서 요구하거나 서면으로 동의하지 않는 한, 라이선스에 따라 배포되는 소프트웨어는
+ * 명시적이든 묵시적이든 어떠한 종류의 보증이나 조건 없이 "있는 그대로" 배포됩니다.
+ * 라이선스에 따른 특정 언어의 권한 및 제한사항에 대해서는 라이선스를 참조하세요.
  */
 plugins {
     id("com.android.application")
@@ -74,6 +72,10 @@ dependencies {
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.navigation:navigation-compose:${rootProject.extra["nav_version"]}")
+
+    implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+    implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
+    ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
 
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")

@@ -1,23 +1,23 @@
-# Bus Schedule App
+# 버스 시간표 앱
 
-This folder contains the source code for the Bus Schedule app codelab.
+이 폴더에는 버스 스케줄 앱 코드랩의 소스 코드가 들어 있습니다.
 
-# Introduction
-The Bus Schedule app displays a list of bus stops and arrival times. Tapping a bus stop on the first
-screen will display a list of all arrival times for that particular stop.
+# 소개
+버스 시간표 앱은 버스 정류장 목록과 도착 시간을 표시합니다. 첫 번째 화면에서 버스 정류장을 탭하면
+화면에서 버스 정류장을 탭하면 해당 정류장의 모든 도착 시간 목록이 표시됩니다.
 
-The bus stops are stored in a Room database. Schedule items are represented by the `Schedule` class 
-and queries on the data table are made by the `ScheduleDao` class. The app includes a view model to
-access the `ScheduleDao` and format data to be display in a list.
+버스 정류장은 룸 데이터베이스에 저장됩니다. 스케줄 항목은 '스케줄' 클래스로 표시되며
+클래스로 표시되며 데이터 테이블에 대한 쿼리는 `ScheduleDao` 클래스에 의해 수행됩니다. 앱에는 다음과 같은 뷰 모델이 포함되어 있습니다.
+스케줄도`에 액세스하고 목록에 표시할 데이터 형식을 지정하는 뷰 모델이 포함되어 있습니다.
 
-# Pre-requisites
-* Experience with Kotlin syntax.
-* Experience with Jetpack Compose.
-* How to create and run a project in Android Studio.
-* Basic knowledge of SQL databases and performing basic queries.
+# 사전 요구 사항
+* Kotlin 구문에 대한 경험.
+* Jetpack Compose 사용 경험.
+* 안드로이드 스튜디오에서 프로젝트를 생성하고 실행하는 방법.
+* SQL 데이터베이스에 대한 기본 지식 및 기본 쿼리 수행.
 
-# Getting Started
-1. Install Android Studio, if you don't already have it.
-2. Download the sample.
-3. Import the sample into Android Studio.
-4. Build and run the sample.
+# 시작하기
+1. 아직 설치하지 않은 경우 안드로이드 스튜디오를 설치합니다.
+2. 샘플을 다운로드합니다.
+3. 샘플을 안드로이드 스튜디오로 가져옵니다.
+4. 샘플을 빌드하고 실행합니다.

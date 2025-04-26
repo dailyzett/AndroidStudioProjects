@@ -15,9 +15,11 @@
  */
 package com.example.busschedule
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.busschedule.data.AppDatabase
 import com.example.busschedule.ui.BusScheduleApp
 import com.example.busschedule.ui.theme.BusScheduleTheme
 
