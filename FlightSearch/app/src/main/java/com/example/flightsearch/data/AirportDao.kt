@@ -2,6 +2,7 @@ package com.example.flightsearch.data
 
 import androidx.room.Dao
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AirportDao {
@@ -24,4 +25,13 @@ interface AirportDao {
         keyword: String,
         limit: Int,
     ): List<Airport>
+
+    @Query(
+        """
+        select *
+        from airport
+        where iata_code = :code
+        """
+    )
+    fun getAirportByCode(code: String): Flow<List<Airport>>
 }

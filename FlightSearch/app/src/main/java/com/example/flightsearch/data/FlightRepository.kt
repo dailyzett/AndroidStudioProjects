@@ -15,4 +15,6 @@ class FlightRepository(
 
     suspend fun deleteByDepartureCode(departureCode: String) =
         favoriteDao.deleteFavoriteByDepartureCode(departureCode)
+
+    fun getAirportByCode(code: String) = airportDao.getAirportByCode(code)
 }

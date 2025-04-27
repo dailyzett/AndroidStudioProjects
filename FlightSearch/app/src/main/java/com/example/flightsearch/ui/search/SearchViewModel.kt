@@ -10,6 +10,7 @@ import com.example.flightsearch.FlightSearchApplication
 import com.example.flightsearch.data.Airport
 import com.example.flightsearch.data.Favorite
 import com.example.flightsearch.data.FlightRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -26,6 +27,7 @@ class SearchViewModel(
 ) : ViewModel() {
 
     private val _keyword = MutableStateFlow("")
+    private val _code = MutableStateFlow("")
     val keyword: StateFlow<String> = _keyword.asStateFlow()
 
     //추천 결과
@@ -54,6 +56,8 @@ class SearchViewModel(
     fun updateKeyword(new: String) {
         _keyword.value = new
     }
+
+    fun getAirportByCode(code: String): Flow<List<Airport>> = repository.getAirportByCode(code)
 
     fun insertFavorite(airport: Airport) {
 
