@@ -76,18 +76,18 @@ fun SearchScreenBody(
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        val favoriteAirports = favorites
+            .map {
+                viewModel.getAirportByCode(it.departureCode)
+                    .collectAsState(initial = emptyList())
+            }
+            .flatMap { it.value }
+
         if (keyword.isBlank()) {
-
-            val airports = favorites
-                .map {
-                    viewModel.getAirportByCode(it.departureCode)
-                        .collectAsState(initial = emptyList())
-                }
-                .flatMap { it.value }
-
             FlightList(
                 favorites = favorites,
-                airports = airports,
+                airports = emptyList(),
+                favoriteAirports = favoriteAirports,
                 onFavoriteClick = { airport ->
                     if (favorites.any { it.departureCode == airport.iataCode }) {
                         viewModel.deleteFavorite(airport.iataCode)
@@ -100,6 +100,7 @@ fun SearchScreenBody(
             FlightList(
                 favorites = favorites,
                 airports = suggestions,
+                favoriteAirports = favoriteAirports,
                 onFavoriteClick = { airport ->
                     if (favorites.any { it.departureCode == airport.iataCode }) {
                         viewModel.deleteFavorite(airport.iataCode)

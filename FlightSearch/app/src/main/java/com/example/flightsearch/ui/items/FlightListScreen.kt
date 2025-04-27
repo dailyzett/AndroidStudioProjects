@@ -31,8 +31,13 @@ import com.example.flightsearch.data.Favorite
 fun FlightList(
     favorites: List<Favorite>,
     airports: List<Airport>,
+    favoriteAirports: List<Airport>,
     onFavoriteClick: (Airport) -> Unit,
 ) {
+
+    val allAirports = (favoriteAirports + airports)
+        .distinctBy { it.iataCode }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -40,7 +45,7 @@ fun FlightList(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(airports) { airport ->
+        items(allAirports) { airport ->
 
             Card(
                 shape = RoundedCornerShape(12.dp),
