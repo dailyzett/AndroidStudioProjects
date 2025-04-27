@@ -1,6 +1,5 @@
 package com.example.flightsearch.ui.search
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -8,13 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -27,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightsearch.ui.components.FlightSearchTopBar
+import com.example.flightsearch.ui.items.FlightList
 
 @Composable
 fun SearchScreen(
@@ -48,6 +45,7 @@ fun SearchScreenBody(
 
     val keyword by viewModel.keyword.collectAsState()
     val suggestions by viewModel.suggestions.collectAsState()
+    val favorites by viewModel.favorites.collectAsState()
 
     Column(
         modifier = Modifier
@@ -78,22 +76,17 @@ fun SearchScreenBody(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-        ) {
-            items(suggestions) { airport ->
-                Text(
-                    text = "${airport.iataCode} ${airport.name}",
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clickable { }
-                        .padding(vertical = 8.dp)
-                )
-                HorizontalDivider()
-            }
-        }
+        FlightList(
+            favorites = favorites,
+            airports = suggestions,
+            onFavoriteClick = { airport ->
+                if (favorites.any { it.departureCode == airport.iataCode }) {
+                    viewModel.deleteFavorite(airport.iataCode)
+                } else {
+                    viewModel.insertFavorite(airport)
+                }
+            },
+        )
     }
 }
 
