@@ -42,10 +42,8 @@ import java.util.UUID
 private const val TAG = "WorkerUtils"
 
 /**
- * Create a Notification that is shown as a heads-up notification if possible.
- *
- * For this codelab, this is used to show a notification so that you know when different steps
- * of the background work chain are starting
+ * 가능하면 헤드업 알림으로 표시되는 알림을 만듭니다.
+ * 이 코드랩에서는 백그라운드 작업 체인의 여러 단계가 언제 시작되는지 알 수 있도록 알림을 표시하는 데 사용됩니다.
  *
  * @param message Message shown on the notification
  * @param context Context needed to create Toast
@@ -54,8 +52,8 @@ fun makeStatusNotification(message: String, context: Context) {
 
     // Make a channel if necessary
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+        // 알림 채널을 생성하되, API 26 이상에서만 생성하는 이유는 다음과 같습니다.
+        // NotificationChannel 클래스는 지원 라이브러리에 없는 새로운 클래스입니다.
         val name = VERBOSE_NOTIFICATION_CHANNEL_NAME
         val description = VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION
         val importance = NotificationManager.IMPORTANCE_HIGH
@@ -69,7 +67,7 @@ fun makeStatusNotification(message: String, context: Context) {
         notificationManager?.createNotificationChannel(channel)
     }
 
-    // Create the notification
+    // 알림 만들기
     val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setContentTitle(NOTIFICATION_TITLE)
@@ -82,7 +80,7 @@ fun makeStatusNotification(message: String, context: Context) {
 }
 
 /**
- * Blurs the given Bitmap image
+ * 지정된 비트맵 이미지를 흐리게 처리합니다.
  * @param bitmap Image to blur
  * @param blurLevel Blur level input
  * @return Blurred bitmap image
@@ -99,7 +97,7 @@ fun blurBitmap(bitmap: Bitmap, blurLevel: Int): Bitmap {
 }
 
 /**
- * Writes bitmap to a temporary file and returns the Uri for the file
+ * 임시 파일에 비트맵을 쓰고 파일에 대한 URI를 반환합니다.
  * @param applicationContext Application context
  * @param bitmap Bitmap to write to temp file
  * @return Uri for temp file with bitmap

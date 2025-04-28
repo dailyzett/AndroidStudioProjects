@@ -28,8 +28,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * [BlurViewModel] starts and stops the WorkManger and applies blur to the image. Also updates the
- * visibility states of the buttons depending on the states of the WorkManger.
+ * BlurViewModel은 워크매니저를 시작 및 중지하고 이미지에 블러를 적용합니다. 또한 워크매니저의 상태에 따라 버튼의 가시성 상태를 업데이트합니다.
  */
 class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : ViewModel() {
 
@@ -38,8 +37,7 @@ class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : Vi
     val blurUiState: StateFlow<BlurUiState> = MutableStateFlow(BlurUiState.Default)
 
     /**
-     * Call the method from repository to create the WorkRequest to apply the blur
-     * and save the resulting image
+     * 리포지토리에서 메서드를 호출하여 블러를 적용하고 결과 이미지를 저장하는 WorkRequest를 생성합니다.
      * @param blurLevel The amount to blur the image
      */
     fun applyBlur(blurLevel: Int) {
@@ -47,7 +45,7 @@ class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : Vi
     }
 
     /**
-     * Factory for [BlurViewModel] that takes [BluromaticRepository] as a dependency
+     * [BluromaticRepository]를 종속성으로 취하는 [BlurViewModel]용 팩토리입니다.
      */
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {

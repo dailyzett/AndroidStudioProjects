@@ -30,20 +30,19 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
     override val outputWorkInfo: Flow<WorkInfo?> = MutableStateFlow(null)
 
     /**
-     * Create the WorkRequests to apply the blur and save the resulting image
-     * @param blurLevel The amount to blur the image
+     * 블러를 적용하고 결과 이미지를 저장할 작업 요청을 생성합니다.
+     * @param blurLevel 이미지를 흐리게 처리할 양
      */
     override fun applyBlur(blurLevel: Int) {}
 
     /**
-     * Cancel any ongoing WorkRequests
+     * 진행 중인 작업 요청 취소
      * */
     override fun cancelWork() {}
 
     /**
-     * Creates the input data bundle which includes the blur level to
-     * update the amount of blur to be applied and the Uri to operate on
-     * @return Data which contains the Image Uri as a String and blur level as an Integer
+     * 적용할 블러 양을 업데이트할 블러 레벨과 작동할 Uri를 포함하는 입력 데이터 번들을 생성합니다.
+     * @return 이미지 Uri를 문자열로, 블러 레벨을 정수로 포함하는 데이터
      */
     private fun createInputDataForWorkRequest(blurLevel: Int, imageUri: Uri): Data {
         val builder = Data.Builder()
