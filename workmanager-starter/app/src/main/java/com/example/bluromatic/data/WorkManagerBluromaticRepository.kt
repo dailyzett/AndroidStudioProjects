@@ -19,9 +19,13 @@ package com.example.bluromatic.data
 import android.content.Context
 import android.net.Uri
 import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.example.bluromatic.KEY_BLUR_LEVEL
 import com.example.bluromatic.KEY_IMAGE_URI
+import com.example.bluromatic.workers.BlurWorker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -29,11 +33,19 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
 
     override val outputWorkInfo: Flow<WorkInfo?> = MutableStateFlow(null)
 
+    private val workManager = WorkManager.getInstance(context)
+
     /**
      * 블러를 적용하고 결과 이미지를 저장할 작업 요청을 생성합니다.
      * @param blurLevel 이미지를 흐리게 처리할 양
      */
-    override fun applyBlur(blurLevel: Int) {}
+    override fun applyBlur(blurLevel: Int) {
+        // Create WorkRequest to blur the image
+        val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
+
+        // Start the work
+        workManager.enqueue(blurBuilder.build())
+    }
 
     /**
      * 진행 중인 작업 요청 취소

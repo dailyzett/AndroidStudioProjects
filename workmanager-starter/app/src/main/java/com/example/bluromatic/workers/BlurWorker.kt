@@ -41,6 +41,11 @@ class BlurWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
                     applicationContext
                 )
 
+                Log.i(
+                    TAG,
+                    outputUrl.toString()
+                )
+
                 Result.success()
             } catch (throwable: Throwable) {
                 Log.e(
