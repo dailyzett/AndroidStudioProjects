@@ -79,7 +79,9 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
     /**
      * 진행 중인 작업 요청 취소
      * */
-    override fun cancelWork() {}
+    override fun cancelWork() {
+        workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
+    }
 
     /**
      * 적용할 블러 양을 업데이트할 블러 레벨과 작동할 Uri를 포함하는 입력 데이터 번들을 생성합니다.
