@@ -17,6 +17,7 @@
 package com.example.waterme.data
 
 import android.content.Context
+import android.util.Log
 import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
@@ -31,5 +32,23 @@ class WorkManagerWaterRepository(context: Context) : WaterRepository {
     override val plants: List<Plant>
         get() = DataSource.plants
 
-    override fun scheduleReminder(duration: Long, unit: TimeUnit, plantName: String) {}
+    override fun scheduleReminder(duration: Long, unit: TimeUnit, plantName: String) {
+
+        val workName = plantName
+
+        // workName 확인을 위해 Log.e 추가
+        Log.e("WorkManagerWaterRepo", "Scheduling reminder for $plantName with work name: $workName")
+
+        //Data.Builder로 data라는 변수를 만듭니다. 데이터는 WaterReminderWorker.nameKey가 키이고 scheduleReminder()에 전달된 plantName이 값인 단일 문자열 값으로 구성되어야 합니다.
+        val data = Data.Builder()
+            .putString(WaterReminderWorker.nameKey, workName)
+            .build()
+
+        val workRequest = OneTimeWorkRequestBuilder<WaterReminderWorker>()
+            .setInputData(data)
+            .setInitialDelay(duration, unit)
+            .build()
+
+        workManager.enqueueUniqueWork(workName, ExistingWorkPolicy.REPLACE, workRequest)
+    }
 }
