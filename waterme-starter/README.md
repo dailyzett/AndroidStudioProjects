@@ -1,23 +1,23 @@
 Water Me! app
 =======================================
 
-This repository contains the code for the Water Me! app project.
+이 리포지토리에는 워터 미! 앱 프로젝트의 코드가 포함되어 있습니다.
 
-This project is an opportunity for you to demonstrate the concepts you learned in Unit 7 of Android Basics with Compose.
+이 프로젝트는 안드로이드 기초 7단원 '컴포즈'에서 배운 개념을 실습할 수 있는 기회입니다.
 
-Note: The app requires notifications to be enabled. To enable notifications, navigate to the Android Settings menu > Apps > Water Me > Notifications > Enable "All Water Me notifications".
+참고: 앱을 사용하려면 알림을 활성화해야 합니다. 알림을 사용 설정하려면 Android 설정 메뉴 > 앱 > 워터미 > 알림 > "모든 워터미 알림" 사용으로 이동합니다.
 
 Pre-requisites
 --------------
 
-You need to know:
+알아야 합니다:
 
-- How to create Composable functions.
-- How to use architecture components including ViewModel.
-- The concept of WorkManager.
+- 컴포저블 함수를 만드는 방법.
+- ViewModel을 포함한 아키텍처 구성 요소를 사용하는 방법.
+- WorkManager의 개념입니다.
 
 Getting Started
 ---------------
 
-1. Download the starter code
-2. Open the project in Android Studio
+1. 스타터 코드 다운로드
+2. 안드로이드 스튜디오에서 프로젝트 열기
